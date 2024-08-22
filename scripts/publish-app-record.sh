@@ -77,9 +77,8 @@ PAYMENT_TX=$(laconic -c $CONFIG_FILE registry tokens send \
   --user-key "${CERC_REGISTRY_USER_KEY}" \
   --bond-id "${CERC_REGISTRY_BOND_ID}" \
   --type alnt \
-  --quantity $CERC_REGISTRY_DEPLOYMENT_REQUEST_PAYMENT_AMOUNT | jq '.tx.hash')
+  --quantity $CERC_REGISTRY_DEPLOYMENT_PAYMENT_AMOUNT | jq '.tx.hash')
 
-cat $PAYMENT_TX
 
 APP_RECORD=$(laconic -c $CONFIG_FILE registry name resolve "$CERC_REGISTRY_APP_CRN" | jq '.[0]')
 if [ -z "$APP_RECORD" ] || [ "null" == "$APP_RECORD" ]; then
@@ -95,8 +94,8 @@ record:
   application: "$CERC_REGISTRY_APP_CRN@$rcd_app_version"
   dns: "$CERC_REGISTRY_DEPLOYMENT_HOSTNAME"
   deployment: "$CERC_REGISTRY_DEPLOYMENT_CRN"
-  to: $CERC_REGISTRY_DEPLOYMENT_REQUEST_PAYMENT_TO
-  payment: $PAYMENT_TX
+  to: "$CERC_REGISTRY_DEPLOYMENT_REQUEST_PAYMENT_TO"
+  payment: "$PAYMENT_TX"
   config:
     env:
       CERC_WEBAPP_DEBUG: "$rcd_app_version"
