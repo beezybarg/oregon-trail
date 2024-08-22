@@ -95,7 +95,7 @@ record:
   dns: "$CERC_REGISTRY_DEPLOYMENT_HOSTNAME"
   deployment: "$CERC_REGISTRY_DEPLOYMENT_CRN"
   to: "$CERC_REGISTRY_DEPLOYMENT_REQUEST_PAYMENT_TO"
-  payment: "$PAYMENT_TX"
+  payment: $PAYMENT_TX
   config:
     env:
       CERC_WEBAPP_DEBUG: "$rcd_app_version"
